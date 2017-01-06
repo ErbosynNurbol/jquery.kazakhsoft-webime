@@ -68,11 +68,19 @@
             else
                 return enChar;
         },
-        inputKzChar:function(){
+        hasKey: function (inputlanguage, enChar) {
+            if (inputlanguage == "arb")
+                return webImeInstance.keyArbMap[enChar] ? true : false;
+            else if (inputlanguage == "cyrl")
+                return webImeInstance.keyCyrlMap[enChar] ? true: false;
+            else
+                return false;
+        },
+        inputKzChar:function(e){
             var e = e ? e : window.event,
                 keyCode = e.keyCode ? e.keyCode : e.which,
                 keyValue = String.fromCharCode(keyCode);
-            if (webImeInstance.imeEnabled)
+            if (webImeInstance.imeEnabled&&webImeInstance.hasKey($(this).attr("data-inputlanguage"),keyValue))
             {
                 if (window.event) window.event.returnValue = false;
                 if (window.event) window.event.cancelBubble = true;
@@ -135,13 +143,22 @@
                     elem.css("direction", inputdirection);
                 }
                 if (fontfamily) elem.css("font-family", fontfamily);
-                elem.unbind("keydown.kazakhsoft", webImeInstance.hotKey);
+                elem.off("keydown.kazakhsoft", webImeInstance.hotKey);
                 elem.on("keydown.kazakhsoft", webImeInstance.hotKey);
-                elem.unbind("keypress.kazakhsoft", webImeInstance.inputKzChar);
+                elem.off("keypress.kazakhsoft", webImeInstance.inputKzChar);
                 elem.on("keypress.kazakhsoft", webImeInstance.inputKzChar);
             }
         });
        return this;
+    };
+    $.fn.destroyKzChar = function (options) {
+        if (!webImeInstance) return;
+        this.each(function () {
+            var elem = $(this);
+            elem.off("keydown.kazakhsoft", webImeInstance.hotKey);
+            elem.off("keypress.kazakhsoft", webImeInstance.inputKzChar);
+        });
+        return this;
     };
     $(function () {
         $('input[type="text"][data-webime="kazakhsoft"],textarea[data-webime="kazakhsoft"]').inputKzChar();
