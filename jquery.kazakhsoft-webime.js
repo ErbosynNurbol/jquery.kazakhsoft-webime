@@ -16,7 +16,7 @@
         kyrgyz: 'kg'
     };
     var settings = {
-        inputlanguage: lang.kyrgyz,
+        inputlanguage: lang.kazak,
         inputdirection: 'auto',//'auto','rtl','ltr'
         fontfamily: ''//'KazNet'
     };
