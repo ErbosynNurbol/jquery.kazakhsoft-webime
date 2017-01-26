@@ -25,7 +25,7 @@
     }
     KzSoftWebIMe.prototype = {
         constructor: KzSoftWebIMe,
-        version:'V1.0',
+        version:'V1.2',
         kzMap: {
             "A": "0x2014", "a": "0x06BE", "B": "0x0628", "b": "0x0628", "C": "0x0639", "c": "0x0639", "D": "0x062F",
             "d": "0x062F", "E": "0x06D5", "e": "0x0621", "F": "0x0641", "f": "0x0627", "G": "0x06AF", "g": "0x06D5",
