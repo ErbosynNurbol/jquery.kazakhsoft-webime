@@ -16,7 +16,7 @@
         kyrgyz: 'kg'
     };
     var settings = {
-        inputlanguage: lang.kazak,
+        inputlanguage: lang.kyrgyz,
         inputdirection: 'auto',//'auto','rtl','ltr'
         fontfamily: ''//'KazNet'
     };
@@ -170,7 +170,6 @@
                     inputdirection = (options.hasOwnProperty('inputdirection') || typeof (elem.attr("data-inputdirection")) == "undefined") ? settings["inputdirection"] : elem.attr("data-inputdirection"),
                     fontfamily = (options.hasOwnProperty('fontfamily') || typeof (elem.attr("data-fontfamily")) == "undefined") ? settings["fontfamily"] : elem.attr("data-fontfamily");
                 elem.attr("data-inputlanguage", inputlanguage);
-                console.log(inputlanguage);
                 if (inputdirection == 'auto') {
                     elem.css("direction", inputlanguage != lang.cyrl ? 'rtl' : 'ltr');
                 } else if (inputdirection == 'rtl' || inputdirection == 'ltr') {
