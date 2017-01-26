@@ -3,14 +3,20 @@
 * Author: Nurbol
 * E-mail: mauleta@outlook.com 
 * http://www.kazakhsoft.com
-* Date:2016-08-07,BeiJing.
+* Date:2017-01-27,BeiJing.
 * Support input in  all kind of web browser:IE, Firefox, Safari, Opera, Chrome,Edge etc.
 */
 
 (function ($) {
     "use strict";
+    var lang = {
+        cyrl: 'kk',
+        kazak: 'kz',
+        uyghur: 'ug',
+        kyrgyz: 'kg'
+    };
     var settings = {
-        inputlanguage: 'arb',//'arb' or 'cyrl'
+        inputlanguage: lang.kyrgyz,
         inputdirection: 'auto',//'auto','rtl','ltr'
         fontfamily: ''//'KazNet'
     };
@@ -20,7 +26,7 @@
     KzSoftWebIMe.prototype = {
         constructor: KzSoftWebIMe,
         version:'V1.0',
-        keyArbMap: {
+        kzMap: {
             "A": "0x2014", "a": "0x06BE", "B": "0x0628", "b": "0x0628", "C": "0x0639", "c": "0x0639", "D": "0x062F",
             "d": "0x062F", "E": "0x06D5", "e": "0x0621", "F": "0x0641", "f": "0x0627", "G": "0x06AF", "g": "0x06D5",
             "H": "0x062D", "h": "0x0649", "I": "0x06AD", "i": "0x06AD", "J": "0x062C", "j": "0x0642", "K": "0x06C6",
@@ -31,7 +37,7 @@
             "y": "0x064A", "Z": "0x0632", "z": "0x0632", ";": "0x061B", "?": "0x061F", ",": "0x060C", "<": "0x00BB",
             ">": "0x00AB", "{": "0x007D", "}": "0x007B", "[": "0x005D", "]": "0x005B", "(": "0x0029", ")": "0x0028"
         },
-        keyCyrlMap: {
+        kkMap: {
             "A": "0x0424", "a": "0x0444", "B": "0x0418", "b": "0x0438", "C": "0x0421", "c": "0x0441", "D": "0x0412",
             "d": "0x0432", "E": "0x0423", "e": "0x0443", "F": "0x0410", "f": "0x0430", "G": "0x041F", "g": "0x043F",
             "H": "0x0420", "h": "0x0440", "I": "0x0428", "i": "0x0448", "J": "0x041E", "j": "0x043E", "K": "0x041B",
@@ -46,6 +52,28 @@
             "^": "0x003A", "7": "0x002E", "&": "0x003B", "8": "0x04AF", "*": "0x04AE", "9": "0x04B1", "(": "0x04B0",
             "0": "0x049B", ")": "0x049A", "-": "0x04E9", "_": "0x04E8", "=": "0x04BB", "+": "0x04BA"
         },
+        ugMap: {
+            "A": "0x06be", "a": "0x06be", "B": "0x0628", "b": "0x0628", "C": "0x063a", "c": "0x063a", "D": "0x0698",
+            "d": "0x062f", "E": "0x06d0", "e": "0x06d0", "F": "0x0641", "f": "0x0627", "G": "0x06af", "g": "0x06d5",
+            "H": "0x062e", "h": "0x0649", "I": "0x06ad", "i": "0x06ad", "J": "0x062c", "j": "0x0642", "K": "0x06c6",
+            "k": "0x0643", "L": "0x0644", "l": "0x0644", "M": "0x0645", "m": "0x0645", "N": "0x0646", "n": "0x0646",
+            "O": "0x0648", "o": "0x0648", "P": "0x067E", "p": "0x067E", "Q": "0x0686", "q": "0x0686", "R": "0x0631",
+            "r": "0x0631", "S": "0x0633", "s": "0x0633", "T": "0x0640", "t": "0x062A", "U": "0x06C7", "u": "0x06C7",
+            "V": "0x06c8", "v": "0x06c8", "W": "0x06CB", "w": "0x06CB", "X": "0x0634", "x": "0x0634", "Y": "0x064A",
+            "y": "0x064A", "Z": "0x0632", "z": "0x0632", ";": "0x061B", "?": "0x061F", ",": "0x060C", "<": "0x00BB",
+            ">": "0x00AB", "{": "0x007D", "}": "0x007B", "[": "0x005D", "]": "0x005B", "(": "0x0029", ")": "0x0028"
+         },
+        kgMap: {
+             "A": "0x2014", "a": "0x06BE", "B": "0x0628", "b": "0x0628", "C": "0x0639", "c": "0x0639", "D": "0x062F",
+             "d": "0x062F", "E": "0x06D5", "e": "0x0621", "F": "0x0641", "f": "0x0627", "G": "0x06AF", "g": "0x06D5",
+             "H": "0x062D", "h": "0x0649", "I": "0x06AD", "i": "0x06AD", "J": "0x062C", "j": "0x0642", "K": "0x06C6",
+             "k": "0x0643", "L": "0x0644", "l": "0x0644", "M": "0x0645", "m": "0x0645", "N": "0x0646", "n": "0x0646",
+             "O": "0x0648", "o": "0x0648", "P": "0x067E", "p": "0x067E", "Q": "0x0686", "q": "0x0686", "R": "0x0631",
+             "r": "0x0631", "S": "0x0633", "s": "0x0633", "T": "0x062A", "t": "0x062A", "U": "0x06C7", "u": "0x06C7",
+             "V": "0x06C6", "v": "0x06C6", "W": "0x06CB", "w": "0x06CB", "X": "0x0634", "x": "0x0634", "Y": "0x064A",
+             "y": "0x064A", "Z": "0x0632", "z": "0x0632", ";": "0x061B", "?": "0x061F", ",": "0x060C", "<": "0x00BB",
+             ">": "0x00AB", "{": "0x007D", "}": "0x007B", "[": "0x005D", "]": "0x005B", "(": "0x0029", ")": "0x0028"
+         },
         Insert: function (obj, str) {
             if (document.selection) {
                 var oSel = document.selection.createRange();
@@ -60,41 +88,44 @@
                 obj.selectionStart = obj.selectionEnd = currPos + 1;
             }
         },
+        containsValue: function (inputlanguage) {
+            for (var l in lang) {
+                if (lang[l] == inputlanguage) return true;
+            }
+            return false;
+        },
         en2Kz: function (inputlanguage, enChar) {
-            if (inputlanguage == "arb")
-                return webImeInstance.keyArbMap[enChar] ? String.fromCharCode(webImeInstance.keyArbMap[enChar]) : enChar;
-            else if (inputlanguage == "cyrl")
-                return webImeInstance.keyCyrlMap[enChar] ? String.fromCharCode(webImeInstance.keyCyrlMap[enChar]) : enChar;
-            else
-                return enChar;
+            if (this.containsValue(inputlanguage)) {
+                return eval("this."+inputlanguage+"Map['"+enChar+"']")? String.fromCharCode(eval("this."+inputlanguage+"Map['"+enChar+"']")) : enChar;
+            }
+            return enChar; 
         },
         hasKey: function (inputlanguage, enChar) {
-            if (inputlanguage == "arb")
-                return webImeInstance.keyArbMap[enChar] ? true : false;
-            else if (inputlanguage == "cyrl")
-                return webImeInstance.keyCyrlMap[enChar] ? true: false;
-            else
-                return false;
+            if (this.containsValue(inputlanguage)) {
+                return !!eval("this." + inputlanguage + "Map['" + enChar + "']");
+            }
+            return false;
         },
-        inputKzChar:function(e){
-            var e = e ? e : window.event,
-                keyCode = e.keyCode ? e.keyCode : e.which,
+        inputKzChar: function (e) {
+             var ev = e ? e : window.event,
+                keyCode = ev.keyCode ? ev.keyCode : ev.which,
+                srcElement = ev.srcElement ? ev.srcElement : ev.target,
                 keyValue = String.fromCharCode(keyCode);
-            if (webImeInstance.imeEnabled&&webImeInstance.hasKey($(this).attr("data-inputlanguage"),keyValue))
+                if (this.imeEnabled && this.hasKey($(srcElement).attr("data-inputlanguage"), keyValue))
             {
                 if (window.event) window.event.returnValue = false;
                 if (window.event) window.event.cancelBubble = true;
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-                webImeInstance.Insert(this, webImeInstance.en2Kz($(this).attr("data-inputlanguage"), keyValue));
+                if (ev.preventDefault) ev.preventDefault();
+                if (ev.stopPropagation) ev.stopPropagation();
+                this.Insert(srcElement, this.en2Kz($(srcElement).attr("data-inputlanguage"), keyValue));
             }
         },
         hotKey : function(e){
-            var e = e ? e : window.event,
-             src = e.srcElement ? e.srcElement : e.target,
-             keyCode = e.keyCode ? e.keyCode : e.which;
-            if (keyCode == 75 && e.ctrlKey && e.altKey) {
-                webImeInstance.imeEnabled = !webImeInstance.imeEnabled;
+            var ev = e ? e : window.event,
+             src = ev.srcElement ? ev.srcElement : ev.target,
+             keyCode = ev.keyCode ? ev.keyCode : ev.which;
+            if (keyCode == 75 && ev.ctrlKey && ev.altKey) {
+                this.imeEnabled = !this.imeEnabled;
                 $(src).trigger("imeEnabled");
             }
         }
@@ -117,8 +148,8 @@
     };
 
     $.inputKzChar = function (e, options) {
-        var e = e ? e : window.event;
-        var src = e.srcElement ? e.srcElement : e.target;
+        var ev= e ? e : window.event,
+         src = ev.srcElement ? ev.srcElement : ev.target;
         $(src).inputKzChar(options);
         $(src).removeAttr("onkeypress");
         $(src).trigger("keypress");
@@ -139,16 +170,17 @@
                     inputdirection = (options.hasOwnProperty('inputdirection') || typeof (elem.attr("data-inputdirection")) == "undefined") ? settings["inputdirection"] : elem.attr("data-inputdirection"),
                     fontfamily = (options.hasOwnProperty('fontfamily') || typeof (elem.attr("data-fontfamily")) == "undefined") ? settings["fontfamily"] : elem.attr("data-fontfamily");
                 elem.attr("data-inputlanguage", inputlanguage);
+                console.log(inputlanguage);
                 if (inputdirection == 'auto') {
-                    elem.css("direction", inputlanguage == 'arb' ? 'rtl' : 'ltr');
+                    elem.css("direction", inputlanguage != lang.cyrl ? 'rtl' : 'ltr');
                 } else if (inputdirection == 'rtl' || inputdirection == 'ltr') {
                     elem.css("direction", inputdirection);
                 }
                 if (fontfamily) elem.css("font-family", fontfamily);
-                elem.off("keydown.kazakhsoft", webImeInstance.hotKey);
-                elem.on("keydown.kazakhsoft", webImeInstance.hotKey);
-                elem.off("keypress.kazakhsoft", webImeInstance.inputKzChar);
-                elem.on("keypress.kazakhsoft", webImeInstance.inputKzChar);
+                elem.off("keydown.kazakhsoft");
+                elem.on("keydown.kazakhsoft", $.proxy(webImeInstance.hotKey, webImeInstance));
+                elem.off("keypress.kazakhsoft");
+                elem.on("keypress.kazakhsoft",$.proxy(webImeInstance.inputKzChar,webImeInstance));
             }
         });
        return this;
