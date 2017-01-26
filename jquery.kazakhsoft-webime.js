@@ -91,9 +91,11 @@
         },
         hotKey : function(e){
             var e = e ? e : window.event,
+             src = e.srcElement ? e.srcElement : e.target,
              keyCode = e.keyCode ? e.keyCode : e.which;
             if (keyCode == 75 && e.ctrlKey && e.altKey) {
                 webImeInstance.imeEnabled = !webImeInstance.imeEnabled;
+                $(src).trigger("imeEnabled");
             }
         }
     };
@@ -150,15 +152,6 @@
             }
         });
        return this;
-    };
-    $.fn.destroyKzChar = function (options) {
-        if (!webImeInstance) return;
-        this.each(function () {
-            var elem = $(this);
-            elem.off("keydown.kazakhsoft", webImeInstance.hotKey);
-            elem.off("keypress.kazakhsoft", webImeInstance.inputKzChar);
-        });
-        return this;
     };
     $(function () {
         $('input[type="text"][data-webime="kazakhsoft"],textarea[data-webime="kazakhsoft"]').inputKzChar();
