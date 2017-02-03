@@ -2,7 +2,7 @@
 /*
 * Author: Nurbol
 * E-mail: mauleta@outlook.com 
-* http://www.kazakhsoft.com
+* http://kazakhsoft.com
 * Date:2017-01-27,BeiJing.
 * Support input in  all kind of web browser:IE, Firefox, Safari, Opera, Chrome,Edge etc.
 */
