@@ -15,3 +15,23 @@
         //$('*').inputKzChar({inputlanguage:'kg'}); //input kyrgyz chars
     })
 ```
+```html
+<input type="text" id="name" />
+```
+```javascript
+   $(function () {
+        $('#name').inputKzChar();
+    })
+```
+```html
+<input type="text" class="kztxt" />
+```
+```javascript
+    $(function () {
+        $('.kztxt').inputKzChar();
+    })
+```
+Or
+```html
+<input type="text" data-webime="kazakhsoft" data-inputlanguage="kk" />
+```
